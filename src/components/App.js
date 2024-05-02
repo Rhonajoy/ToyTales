@@ -3,15 +3,14 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import ToyForm from "./ToyForm";
 import ToyContainer from "./ToyContainer";
-
+import axios from "axios";
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [toys,setToys]=useState([])
 
   useEffect(()=>{
-    fetch('http://localhost:3001/toys').
-    then((response=>response.json()))
-    .then(setToys)
+    axios.get('http://localhost:3001/toys')
+    .then((response)=>setToys(response.data))
   },[])
 
   function handleClick() {
